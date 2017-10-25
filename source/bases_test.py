@@ -82,6 +82,9 @@ class BasesDecodeTest(unittest.TestCase):
         assert decode('101101', 32) == 33588225
         assert decode('101101', 36) == 60514129
 
+    def test_decode_base3(self):
+        assert decode('101', 3) == 10
+
 
 class BasesEncodeTest(unittest.TestCase):
 
