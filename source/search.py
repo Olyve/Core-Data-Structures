@@ -18,14 +18,13 @@ def linear_search_iterative(array, item):
 
 
 def linear_search_recursive(array, item, index=0):
-    if index == len(array) - 1:
-        if array[index] != item:
-            return None
+    if index < 0 or index > len(array) - 1:
+        return
 
     if array[index] == item:
         return index
-    else:
-        return linear_search_recursive(array, item, index + 1)
+
+    return linear_search_recursive(array, item, index + 1)
 
 
 def binary_search(array, item):
