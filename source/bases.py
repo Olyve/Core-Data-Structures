@@ -31,18 +31,17 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
 
     max_value = 0
-    num_digits = 0
+    digit_index = 0
     encoded_string = ""
 
     while max_value <= number:
-        max_value = pow(base, num_digits)
-        num_digits += 1
-    num_digits -= 2
+        max_value = pow(base, digit_index)
+        digit_index += 1
+    digit_index -= 2
 
-    for i in range(num_digits, -1, -1):
+    for i in range(digit_index, -1, -1):
         expo = pow(base, i)
         if number - expo >= 0:
             remainder = expo % number
@@ -87,7 +86,8 @@ def main():
         print('Usage: {} digits base1 base2'.format(sys.argv[0]))
         print('Converts digits from base1 to base2')
 
-    print(encode(5, 10))
+    print(decode('123456', 8))
+
 
 if __name__ == '__main__':
     main()
