@@ -1,7 +1,6 @@
 #!python
 
 import string
-import re
 # Hint: Use these string constants to ignore capitalization and/or punctuation
 # string.ascii_lowercase is 'abcdefghijklmnopqrstuvwxyz'
 # string.ascii_uppercase is 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -17,18 +16,21 @@ def is_palindrome(text):
 
     # Clean the input to make sure we get correct return
     clean_text = text.lower().strip()
-    clean_text = re.sub('\W', '', clean_text)
 
-    # return is_palindrome_iterative(clean_text)
-    return is_palindrome_recursive(clean_text)
+    return is_palindrome_iterative(clean_text)
+    # return is_palindrome_recursive(clean_text)
 
 
 def is_palindrome_iterative(text):
-    reverse_text = text[::-1]
+    left = 0
+    right = len(text) - 1
 
-    for i in range(len(text) - 1):
-        if text[i] != reverse_text[i]:
+    while left < right:
+        if text[left] != text[right]:
             return False
+        left += 1
+        right -= 1
+
     return True
 
 
