@@ -52,6 +52,7 @@ class StringsTest(unittest.TestCase):
         assert find_index('aaa', 'aa') == 0  # overlapping pattern
         # TODO: Write more positive test cases with assert equal int statements
         # ...
+        assert find_index('aaaaaaab', 'aaaab') == 3
 
     def test_find_index_with_non_matching_patterns(self):
         # Negative test cases (counterexamples) with non-matching patterns
