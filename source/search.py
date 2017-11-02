@@ -31,36 +31,55 @@ def binary_search(array, item):
     """return the index of item in sorted array or None if item is not found"""
     # implement binary_search_iterative and binary_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return binary_search_iterative(array, item)
-    # return binary_search_recursive(array, item)
+    # return binary_search_iterative(array, item)
+    return binary_search_recursive(array, item)
 
 
 def binary_search_iterative(array, item):
-    index = None
-    items = list(array)
+    left_index = 0
+    right_index = len(array) - 1
+    current_index = 0
 
-    while True:
-        if len(items) == 2:
-            if items[0] == item:
-                index = 0
-            else:
-                index = 1
-            break
+    while left_index <= right_index:
+        # Check if left or right index is item we want
+        if array[left_index] == item:
+            return left_index
+        elif array[right_index] == item:
+            return right_index
 
-        middle = int((len(items) - 1) / 2)
+        # Get middle index and cast to int to remove floating points
+        current_index = int((left_index + right_index) / 2)
+        current_item = array[current_index]
 
-        if items[middle] == item:
-            index = middle
-            break
-        elif item < items[middle]:
-            items = items[:middle]
-        else:
-            items = items[middle:]
-    return index
+        if current_item == item:
+            return current_index
+        elif item < current_item:
+            right_index = current_index
+            left_index += 1
+        elif item > current_item:
+            left_index = current_index
+            right_index -= 1
+    return None
 
 
 def binary_search_recursive(array, item, left=None, right=None):
-    # TODO: implement binary search recursively here
-    pass
-    # once implemented, change binary_search to call binary_search_recursive
-    # to verify that your recursive implementation passes all tests
+    if left == None and right == None:
+        left = 0
+        right = len(array) - 1
+
+    if left > right:
+        return None
+    elif array[left] == item:
+        return left
+    elif array[right] == item:
+        return right
+
+    current_index = int((left + right) / 2)
+    current_item = array[current_index]
+    
+    if current_item == item:
+        return current_index
+    elif item < current_item:
+        return binary_search_recursive(array, item, left + 1, current_index)
+    elif item > current_item:
+        return binary_search_recursive(array, item, current_index, right - 1)
