@@ -108,7 +108,7 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1)"""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -174,8 +174,8 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) if near beginning of list
+        Worst case running time: O(n) if closer to middle or end"""
         # Start at the head node
         node = self.head
         previous = None
