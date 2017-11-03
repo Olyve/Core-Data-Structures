@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/macos,python
 
+# Just...no
+Call Routing/
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
