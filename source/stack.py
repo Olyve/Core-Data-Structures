@@ -29,16 +29,16 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(1) – Adding item at end is constant operation because
-        we track the tail of the list"""
-        self.list.append(item)
+        Running time: O(1) – Adding item at beginning is constant operation because
+        we track the head of the list"""
+        self.list.prepend(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
         if self.is_empty():
-            return
-        return self.list.get_at_index(self.length() - 1)
+            return None
+        return self.list.head.data
 
     def pop(self):
         """Remove and return the item on the top of this stack,
@@ -47,8 +47,11 @@ class LinkedStack(object):
         finding the item at the end"""
         if self.is_empty():
             raise ValueError("Cannot pop from an empty stack")
+
         item = self.peek()
-        self.list.delete(item)
+        self.list.head = self.list.head.next
+        if self.list.size == 1:
+            self.list.tail = None
         return item
 
 
@@ -97,10 +100,10 @@ class ArrayStack(object):
         the element. Because it is at the end, nothing needs to be shifted"""
         if self.is_empty():
             raise ValueError("Cannot pop an empty stack")
-        return self.list.pop(-1)
+        return self.list.pop()
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-# Stack = LinkedStack
-Stack = ArrayStack
+Stack = LinkedStack
+# Stack = ArrayStack
