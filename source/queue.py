@@ -37,7 +37,7 @@ class LinkedQueue(object):
         or None if this queue is empty."""
         if self.is_empty():
             return 
-        return self.list.get_at_index(0)
+        return self.list.head.data
 
     def dequeue(self):
         """Remove and return the item at the front of this queue,
@@ -45,7 +45,7 @@ class LinkedQueue(object):
         Running time: O(1) – Both operations only change first item in list"""
         if self.is_empty():
             raise ValueError("Cannot dequeue, queue is empty.")
-        item = self.list.get_at_index(0)
+        item = self.list.head.data
         self.list.delete(item)
         return item
 
