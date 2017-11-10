@@ -108,7 +108,11 @@ class HashTable(object):
         bucket = self.buckets[index]
         # Find the entry with the given key in that bucket, if one exists
         # Check if an entry with the given key exists in that bucket
+<<<<<<< HEAD
         entry = bucket.find(lambda key_value: key_value[0] == key)       # O(n)
+=======
+        entry = bucket.find(lambda key_value: key_value[0] == key)
+>>>>>>> 611cca336112bb2fc7718b0e062f6629f07d81ad
         if entry is not None:  # Found
             # In this case, the given key's value is being updated
             # Remove the old key-value entry from the bucket first
