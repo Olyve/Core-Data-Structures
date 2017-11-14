@@ -121,7 +121,7 @@ class BinarySearchTree(object):
         # Loop until we descend past the closest leaf node
         while node is not None:
             # Check if the given item matches the node's data
-            if node.data == item:
+            if item == node.data:
                 # Return the found node
                 return node
             # Check if the given item is less than the node's data
@@ -129,7 +129,7 @@ class BinarySearchTree(object):
                 # Descend to the node's left child
                 node = node.left
             # Check if the given item is greater than the node's data
-            elif item> node.data:
+            elif item > node.data:
                 # Descend to the node's right child
                 node = node.right
         # Not found
