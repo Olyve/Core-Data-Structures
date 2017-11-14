@@ -33,19 +33,13 @@ class BinaryTreeNode(object):
             return 0
 
         # Check if left child has a value and if so calculate its height
-        if self.left is not None:
-            left_height = self.left.height()
-        else:
-            left_height = 0
+        left_height = 0 if self.left is None else self.left.height()
 
         # Check if right child has a value and if so calculate its height
-        if self.right is not None:
-            right_height = self.right.height()
-        else:
-            right_height = 0
+        right_height = 0 if self.right is None else self.right.height()
 
         # Return one more than the greater of the left height and right height
-        return (left_height if left_height >= right_height else right_height) + 1
+        return max(left_height, right_height) + 1
 
 
 class BinarySearchTree(object):
