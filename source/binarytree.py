@@ -1,6 +1,6 @@
 #!python
 from queue import LinkedQueue
-
+from collections import deque
 
 class BinaryTreeNode(object):
 
@@ -195,14 +195,17 @@ class BinarySearchTree(object):
 
         if node.data == item:
             return parent
-        elif item < node.data:
-            if node.left is None:
-                return node
-            return self._find_parent_node_recursive(item, node.left, node)
-        elif item > node.data:
-            if node.right is None:
-                return node
+        # Check if we should descend to the left
+        elif item < node.data and node.left is not None:
+            parent = node
+            node = node.left
+            return self._find_parent_node_recursive(item, node, parent)
+        # Check if we should descend to the right
+        elif item > node.data and node.right is not None:
             return self._find_parent_node_recursive(item, node.right, node)
+        # The item does not exist, but this would be it's parent
+        else:
+            return node
 
     # This space intentionally left blank (please do not delete this comment)
 
@@ -237,7 +240,22 @@ class BinarySearchTree(object):
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Traverse in-order without using recursion (stretch challenge)
+        # Traverse in-order without using recursion (stretch challenge)
+        # Create queue and enqueue first node
+        stack = deque()
+        stack.append(node)
+        # Loop through all nodes in order
+        while len(stack) > 0:
+            node = stack.pop()
+            # Enqueue left node if it exists
+            if node.left is not None:
+                stack.append(node.left)
+            # Visit node's data
+            visit(node.data)
+            # Enqueue right node if it exists
+            if node.right is not None:
+                stack.append(node.right)
+
 
     def items_pre_order(self):
         """Return a pre-order list of all items in this binary search tree."""
