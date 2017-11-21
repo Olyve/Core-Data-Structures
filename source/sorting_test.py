@@ -80,46 +80,46 @@ class IsSortedTest(unittest.TestCase):
         # ...
 
 
-class SortTest(unittest.TestCase):
+# class SortTest(unittest.TestCase):
 
-    def test_sort_on_empty_list(self):
-        items = []
-        sort(items)
-        assert items == []  # List should not be changed
+    # def test_sort_on_empty_list(self):
+    #     items = []
+    #     sort(items)
+    #     assert items == []  # List should not be changed
 
-    def test_sort_on_small_lists_of_integers(self):
-        items1 = [3]
-        sort(items1)
-        assert items1 == [3]  # List should not be changed
-        items2 = [5, 3]
-        sort(items2)
-        assert items2 == [3, 5]  # List should be in sorted order
-        items3 = [5, 7, 3]
-        sort(items3)
-        assert items3 == [3, 5, 7]
-        # TODO: Write more positive test cases with assert is True statements
-        # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+    # def test_sort_on_small_lists_of_integers(self):
+    #     items1 = [3]
+    #     sort(items1)
+    #     assert items1 == [3]  # List should not be changed
+    #     items2 = [5, 3]
+    #     sort(items2)
+    #     assert items2 == [3, 5]  # List should be in sorted order
+    #     items3 = [5, 7, 3]
+    #     sort(items3)
+    #     assert items3 == [3, 5, 7]
+    #     # TODO: Write more positive test cases with assert is True statements
+    #     # You'll need a lot more than this to test sorting algorithm robustness
+    #     # ...
 
-    def test_sort_on_small_lists_of_strings(self):
-        items1 = ['A']
-        sort(items1)
-        assert items1 == ['A']  # List should not be changed
-        items2 = ['B', 'A']
-        sort(items2)
-        assert items2 == ['A', 'B']  # List should be in sorted order
-        items3 = ['B', 'C', 'A']
-        sort(items3)
-        assert items3 == ['A', 'B', 'C']
-        # TODO: Write more positive test cases with assert is True statements
-        # You'll need a lot more than this to test sorting algorithm robustness
-        # ...
+    # def test_sort_on_small_lists_of_strings(self):
+    #     items1 = ['A']
+    #     sort(items1)
+    #     assert items1 == ['A']  # List should not be changed
+    #     items2 = ['B', 'A']
+    #     sort(items2)
+    #     assert items2 == ['A', 'B']  # List should be in sorted order
+    #     items3 = ['B', 'C', 'A']
+    #     sort(items3)
+    #     assert items3 == ['A', 'B', 'C']
+    #     # TODO: Write more positive test cases with assert is True statements
+    #     # You'll need a lot more than this to test sorting algorithm robustness
+    #     # ...
 
-    def test_sort_on_lists_of_random_integers(self):
-        # TODO: Generate lists of random integers
-        # TODO: Write more test cases with assert is True statements
-        pass
-        # ...
+    # def test_sort_on_lists_of_random_integers(self):
+    #     # TODO: Generate lists of random integers
+    #     # TODO: Write more test cases with assert is True statements
+    #     pass
+    #     # ...
 
 
 if __name__ == '__main__':

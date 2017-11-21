@@ -3,7 +3,14 @@
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order."""
-    # TODO: Check that all adjacent items are in order, return early if not
+    # Check that all adjacent items are in order, return early if not
+    if len(items) <= 1:
+        return True
+        
+    for i in range(len(items) - 1):
+        if items[i] > items[i + 1]:
+            return False
+    return True
 
 
 def bubble_sort(items):
