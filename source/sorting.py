@@ -50,7 +50,7 @@ def merge(items1, items2):
     and return a new list containing all items in sorted order.
     Running time: O(n) always have to merge the items by going through
     at least the majority of the items
-    Memory usage: ??? Why and under what conditions?"""
+    Memory usage: O(2n) Original list of items unsorted + new sorted list"""
     # Create two indexes to track position in lists
     left_index = 0 
     right_index = 0
@@ -95,26 +95,26 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(2n^2 + n)
+    Memory usage: O(2n)"""
     # Split items list into approximately equal halves
     middle_index = int(len(items) / 2)
     left = items[:middle_index]
     right = items[middle_index:]
 
     # Sort each half using any other sorting algorithm
-    bubble_sort(left)
-    bubble_sort(right)
+    bubble_sort(left)   # O(n^2)
+    bubble_sort(right)  # O(n^2)
 
     # Merge sorted halves into one list in sorted order
-    items[:] = merge(left, right)
+    items[:] = merge(left, right)   # O(n)
 
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n log n)
+    Memory usage: ??? """
     # Check if list is so small it's already sorted (base case)
     if len(items) < 2:
         return items
@@ -125,11 +125,11 @@ def merge_sort(items):
     right = items[middle_index:]
 
     # Sort each half by recursively calling merge sort
-    merge_sort(left)
-    merge_sort(right)
+    merge_sort(left)    # O(log n)
+    merge_sort(right)   # O(log n)
 
     # Merge sorted halves into one list in sorted order
-    items[:] = merge(left, right)
+    items[:] = merge(left, right)   # O(2n)
 
 
 def random_ints(count=20, min=1, max=50):
