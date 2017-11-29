@@ -86,17 +86,25 @@ def random_ints(count=20, min=1, max=50):
 
 def test_sorting(sort=bubble_sort, num_items=20, max_value=50):
     """Test sorting algorithms with a small list of random items."""
+    import time
+
     # Create a list of items randomly sampled from range [1...max_value]
     items = random_ints(num_items, 1, max_value)
-    print('Initial items: {!r}'.format(items))
-    print('Sorted order?  {!r}'.format(is_sorted(items)))
+    # Only print out smaller lists
+    if len(items) <= 1000:
+        print('Initial items: {!r}'.format(items))
+        print('Sorted order?  {!r}'.format(is_sorted(items)))
 
     # Change this sort variable to the sorting algorithm you want to test
     # sort = bubble_sort
-    print('Sorting items with {}(items)'.format(sort.__name__))
+    # print('Sorting items with {}(items)'.format(sort.__name__))
+    start = time.time()
+    print('Sorting items using {}...'.format(sort.__name__))
     sort(items)
-    print('Sorted items:  {!r}'.format(items))
-    print('Sorted order?  {!r}'.format(is_sorted(items)))
+    if len(items) <= 1000:
+        print('Sorted items:  {!r}'.format(items))
+        print('Sorted order?  {!r}'.format(is_sorted(items)))
+    print('Time to sort: {} seconds'.format(time.time() - start))
 
 
 def main():
