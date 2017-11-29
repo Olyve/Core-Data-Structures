@@ -48,11 +48,47 @@ def insertion_sort(items):
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
+    Running time: O(n) always have to merge the items by going through
+    at least the majority of the items
+    Memory usage: ??? Why and under what conditions?"""
+    # Create two indexes to track position in lists
+    left_index = 0 
+    right_index = 0
+
+    # Track len of both lists
+    left_len = len(items1)
+    right_len = len(items2)
+
+    # Create list to hold final sorted items
+    merged = []
+
+    # Repeat until we reach the end of one of the lists
+    while left_index < left_len  and right_index < right_len:
+        # Store values for convenience
+        left = items1[left_index]
+        right = items2[right_index]
+
+        # Compare and append the smaller of the two to merged
+        if left < right:
+            merged.append(left)
+            left_index += 1
+        elif left == right:
+            merged.append(left)
+            merged.append(right)
+            left_index += 1
+            right_index += 1
+        elif right < left:
+            merged.append(right)
+            right_index += 1
+
+    # Append remaining items of "non-empty" list to merged
+    if left_index == left_len:
+        merged.extend(items2[right_index:])
+    elif right_index == right_len:
+        merged.extend(items1[left_index:])
+
+    # Return the final merged list
+    return merged
 
 
 def split_sort_merge(items):
@@ -61,9 +97,17 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
+    # Split items list into approximately equal halves
+    middle_index = int(len(items) / 2)
+    left = items[:middle_index]
+    right = items[middle_index:]
+
+    # Sort each half using any other sorting algorithm
+    bubble_sort(left)
+    bubble_sort(right)
+
+    # Merge sorted halves into one list in sorted order
+    items[:] = merge(left, right)
 
 
 def merge_sort(items):
@@ -71,10 +115,21 @@ def merge_sort(items):
     sorting each recursively, and merging results into a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half by recursively calling merge sort
-    # TODO: Merge sorted halves into one list in sorted order
+    # Check if list is so small it's already sorted (base case)
+    if len(items) < 2:
+        return items
+
+    # Split items list into approximately equal halves
+    middle_index = int(len(items) / 2)
+    left = items[:middle_index]
+    right = items[middle_index:]
+
+    # Sort each half by recursively calling merge sort
+    merge_sort(left)
+    merge_sort(right)
+
+    # Merge sorted halves into one list in sorted order
+    items[:] = merge(left, right)
 
 
 def random_ints(count=20, min=1, max=50):
