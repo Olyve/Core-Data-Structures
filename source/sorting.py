@@ -48,22 +48,15 @@ def insertion_sort(items):
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    Running time: O(n) always have to merge the items by going through
-    at least the majority of the items
-    Memory usage: O(2n) Original list of items unsorted + new sorted list"""
+    Running time: O(n + m), where n = items1 & m = items2
+    Memory usage: O(n + m) """
     # Create two indexes to track position in lists
     left_index = 0 
     right_index = 0
-
-    # Track len of both lists
-    left_len = len(items1)
-    right_len = len(items2)
-
     # Create list to hold final sorted items
     merged = []
-
     # Repeat until we reach the end of one of the lists
-    while left_index < left_len  and right_index < right_len:
+    while left_index < len(items1)  and right_index < len(items2):
         # Store values for convenience
         left = items1[left_index]
         right = items2[right_index]
@@ -80,12 +73,12 @@ def merge(items1, items2):
         elif right < left:
             merged.append(right)
             right_index += 1
-
-    # Append remaining items of "non-empty" list to merged
-    if left_index == left_len:
-        merged.extend(items2[right_index:])
-    elif right_index == right_len:
-        merged.extend(items1[left_index:])
+    # Loop through remainder of list and appends items
+    # Only executes on one list, not both
+    for i in range(left_index, len(items1)):
+        merged.append(items1[left_index])
+    for i in range(right_index, len(items2)):
+        merged.append(items2[right_index])
 
     # Return the final merged list
     return merged
@@ -98,7 +91,7 @@ def split_sort_merge(items):
     Running time: O(2n^2 + n)
     Memory usage: O(2n)"""
     # Split items list into approximately equal halves
-    middle_index = int(len(items) / 2)
+    middle_index = len(items) // 2
     left = items[:middle_index]
     right = items[middle_index:]
 
@@ -114,22 +107,18 @@ def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
     Running time: O(n log n)
-    Memory usage: ??? """
+    Memory usage: O(n log n)"""
     # Check if list is so small it's already sorted (base case)
-    if len(items) < 2:
-        return items
-
-    # Split items list into approximately equal halves
-    middle_index = int(len(items) / 2)
-    left = items[:middle_index]
-    right = items[middle_index:]
-
-    # Sort each half by recursively calling merge sort
-    merge_sort(left)    # O(log n)
-    merge_sort(right)   # O(log n)
-
-    # Merge sorted halves into one list in sorted order
-    items[:] = merge(left, right)   # O(2n)
+    if len(items) > 1:
+        # Split items list into approximately equal halves
+        middle_index = len(items) // 2
+        left = items[:middle_index]
+        right = items[middle_index:]
+        # Sort each half by recursively calling merge sort
+        merge_sort(left)    # O(log n)
+        merge_sort(right)   # O(log n)
+        # Merge sorted halves into one list in sorted order
+        items[:] = merge(left, right)   # O(2n)
 
 
 def random_ints(count=20, min=1, max=50):
