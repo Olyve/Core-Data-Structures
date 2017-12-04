@@ -30,9 +30,24 @@ def selection_sort(items):
     unsorted item, and repeating until all items are in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Find minimum item in unsorted items
-    # TODO: Swap it with first unsorted item
+    # Track what index we are sorting for
+    cur_index = 0
+
+    # Repeat until all items are in sorted order
+    while not is_sorted(items):
+        # Track min value
+        minimum = 0
+
+        # Find minimum item in unsorted items
+        for index in range(cur_index, len(items)):
+            if items[index] < items[minimum]:
+                minimum = index
+
+        # Swap it with first unsorted item
+        items[cur_index], items[index] = items[index], items[cur_index]
+
+        # Increment cur_index
+        cur_index += 1
 
 
 def insertion_sort(items):
@@ -56,7 +71,7 @@ def merge(items1, items2):
     # Create list to hold final sorted items
     merged = []
     # Repeat until we reach the end of one of the lists
-    while left_index < len(items1)  and right_index < len(items2):
+    while left_index < len(items1) and right_index < len(items2):
         # Store values for convenience
         left = items1[left_index]
         right = items2[right_index]
@@ -65,16 +80,16 @@ def merge(items1, items2):
         if left < right:
             merged.append(left)
             left_index += 1
+        elif left > right:
+            merged.append(right)
+            right_index += 1
         elif left == right:
             merged.append(left)
             merged.append(right)
             left_index += 1
             right_index += 1
-        elif right < left:
-            merged.append(right)
-            right_index += 1
     # Loop through remainder of list and appends items
-    # Only executes on one list, not both
+    # Only executes on list that did not finish, not both
     for i in range(left_index, len(items1)):
         merged.append(items1[left_index])
     for i in range(right_index, len(items2)):
@@ -91,9 +106,9 @@ def split_sort_merge(items):
     Running time: O(2n^2 + n)
     Memory usage: O(2n)"""
     # Split items list into approximately equal halves
-    middle_index = len(items) // 2
-    left = items[:middle_index]
-    right = items[middle_index:]
+    pivot = len(items) // 2
+    left = items[:pivot]
+    right = items[pivot:]
 
     # Sort each half using any other sorting algorithm
     bubble_sort(left)   # O(n^2)
@@ -111,9 +126,9 @@ def merge_sort(items):
     # Check if list is so small it's already sorted (base case)
     if len(items) > 1:
         # Split items list into approximately equal halves
-        middle_index = len(items) // 2
-        left = items[:middle_index]
-        right = items[middle_index:]
+        pivot = int(len(items) / 2)
+        left = items[:pivot]
+        right = items[pivot:]
         # Sort each half by recursively calling merge sort
         merge_sort(left)    # O(log n)
         merge_sort(right)   # O(log n)
